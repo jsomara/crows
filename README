@@ -1,0 +1,21 @@
+This book will take your Game of Thrones epub files and combine them 
+into a single epub, broken up and rearrange chronologically by character.
+
+You must use the following directory structure:
+
+---
+ - GOT/ { game of thrones content }
+ - COK/ { clash of kings content }
+ - SOS/ { storm of swords content }
+ - FFC/ { feast for crows content }
+ - DWD/ { dance with dragons content }
+---
+
+Run "crows.rb" and it will parse the epub files and recombine them into
+a single file, asoiaf.epub. It puts the major POV characters in a certain
+order and combines the one-off characters into "Extras" at the end.
+
+If it looks like you are missing chapters, it is probably because the XML
+structure of your epubs are different than the one I was using. Unfortunately,
+there is no semantic way to grab the chapter titles from the HTML files, resulting
+in me having to parse them out manually. 

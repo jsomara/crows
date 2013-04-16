@@ -1,0 +1,20 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="uuid_id">
+  <metadata xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:calibre="http://calibre.kovidgoyal.net/2009/metadata" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:creator opf:role="aut" opf:file-as="Martin, George R. R.">George R. R. Martin</dc:creator>
+<dc:publisher>Bantam Books</dc:publisher>
+    <meta name="calibre:series_index" content="2.0"/>
+    <meta name="calibre:rating" content="0"/>
+    <dc:description>A comet the color of blood and flame cuts across the sky. Two great leaders—Lord Eddard Stark and Robert Baratheon—who hold sway over an age of enforced peace are dead, victims of royal treachery. Now, from the ancient citadel of Dragonstone to the forbidding shores of Winterfell, chaos reigns. Six factions struggle for control of a divided land and the Iron Throne of the Seven Kingdoms, preparing to stake their claims through tempest, turmoil, and war. It is a tale in which brother plots against brother and the dead rise to walk in the night. Here a princess masquerades as an orphan boy; a knight of the mind prepares a poison for a treacherous sorceress; and wild men descend from the Mountains of the Moon to ravage the countryside. Against a backdrop of incest and fratricide, alchemy and murder, victory may go to the men and women possessed of the coldest steel...and the coldest hearts. For when kings clash, the whole land trembles.</dc:description>
+    <dc:language>UND</dc:language>
+    <meta name="calibre:series" content="A Song of Ice and Fire"/>
+    <dc:title>A Song of Ice & Fire</dc:title>
+    <meta name="cover" content="cover"/>
+    <dc:date>1999-08-15 00:00:00-06:00</dc:date>
+    <meta name="calibre:timestamp" content="2010-08-11T17:04:26.432000+00:00"/>
+    <dc:contributor opf:role="bkp">calibre (0.7.13) [http://calibre-ebook.com]</dc:contributor>
+    <dc:identifier opf:scheme="ISBN">9780553108033</dc:identifier>
+    <dc:identifier id="uuid_id" opf:scheme="uuid">4c338b48-1b2c-4751-96b6-e3f9c9c3b793</dc:identifier>
+  </metadata>
+  <manifest>
+
