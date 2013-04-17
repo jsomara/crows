@@ -74,7 +74,7 @@ def write_toc(toc)
     toc.each do |t|
       f.write(t)
     end
-    f.write("</body></html")
+    f.write("</body></html>")
   end
   system "cp template_toc_temp ./uberbook/toc.html"
   system "rm template_toc_temp"
