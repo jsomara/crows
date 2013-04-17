@@ -68,6 +68,18 @@ def chapter_string(count)
   return "./uberbook/asoiaf_#{postfix}.html"
 end
 
+def write_toc_nav(toc_nav)
+  system "cp template_toc.ncx template_toc.ncx_temp"
+  File.open("template_toc.ncx_temp", 'a') do |f|
+    toc_nav.each do |t|
+      f.write(t)
+    end
+    f.write "</navMap></ncx>"
+  end
+  system "cp template_toc.ncx_temp ./uberbook/toc.ncx"
+  system "rm template_toc.ncx_temp"
+end
+
 def write_toc(toc)
   system "cp template_toc template_toc_temp"
   File.open("template_toc_temp", 'a') do |f|
@@ -118,11 +130,16 @@ def toc_string(filename, character, count)
   "\t<p class=\"calibre7\"><a href=\"#{filename}\" class=\"calibre8\">#{character} #{count}</a></p>\n"
 end
 
+def toc_nav_string(filename,character,charcount,chapcount)
+  "\t<navPoint class=\"chapter\" id=\"nav-#{chapcount}\" playOrder=\"#{chapcount}\">\n\t<navLabel>\n\t\t<text>#{character} #{charcount}</text>\n\t</navLabel>\n\t<content src=\"Text/#{filename}\"/>\n</navPoint>\n"
+end
+
 def write_final_book
   puts "Removing existing uberbook"
   system "rm -rf ./uberbook/*html"
   system "mkdir ./uberbook"
   toc = []
+  tocnav = []
   meta_strs = []
   spine = []
   chaptercount = 0
@@ -137,7 +154,8 @@ def write_final_book
       system "sed \"s/#{name}/#{name} #{charactercount}/\" #{chapter} > #{outfile}"
       chapter_file = outfile.split("./uberbook/")[1]
       meta_strs << content_opf_string(chapter_file, chaptercount)
-      toc << toc_string(chapter_file, char,charactercount)
+      toc << toc_string(chapter_file,char,charactercount)
+      tocnav << toc_nav_string(chapter_file,char,charactercount,chaptercount)
       spine << spine_string(chaptercount)
       chaptercount += 1
       charactercount += 1
@@ -146,6 +164,7 @@ def write_final_book
   puts "Book written to ./uberbook."
   puts "Writing table of contents..."
   write_toc(toc)
+  write_toc_nav(tocnav)
   puts "Writing metadata..."
   write_metadata(meta_strs, spine)
   puts "Combining into ebook..."
