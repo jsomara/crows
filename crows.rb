@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'nokogiri'
 require 'find'
 
@@ -34,15 +35,15 @@ def get_character(doc, book)
   title = ''
   case book
   when "GOT"
-    title = doc.css("h3.calibre5").text
+    title = doc.css("h1").text
   when "COK"
-    title = doc.css("h3.calibre5").text
+    title = doc.css("p.fst").text
   when "SOS"
-    title = doc.css("p.calibre4").text
+    title = doc.css("p.ct").text
   when "FFC"
-    title = doc.css("p.calibre4").text
+    title = doc.css("p.ct").text
   when "DWD"
-    title = doc.css("p.calibre16").text
+    title = doc.css("h1").text
   end
 
   return clean_title(title)
@@ -113,27 +114,33 @@ def spine_string(chapter)
   "\t<itemref idref=\"html#{chapter}\"/>\n"
 end
 
-def toc_string(filename, character)
-  "\t<p class=\"calibre7\"><a href=\"#{filename}\" class=\"calibre8\">#{character}</a></p>\n"
+def toc_string(filename, character, count)
+  "\t<p class=\"calibre7\"><a href=\"#{filename}\" class=\"calibre8\">#{character} #{count}</a></p>\n"
 end
 
 def write_final_book
   puts "Removing existing uberbook"
   system "rm -rf ./uberbook/*html"
+  system "mkdir ./uberbook"
   toc = []
   meta_strs = []
   spine = []
   chaptercount = 0
   @character_order.each do |char|
     puts "Writing chapters for #{char}..."
-    @uber_book[char].each do |chapter|
+    charactercount=1
+    @uber_book[char].reverse.each do |chapter|
       outfile = chapter_string(chaptercount)
-      system "cp #{chapter} #{outfile}"
+      #puts "#{chapter} #{outfile}"
+      #system "cp #{chapter} #{outfile}"
+      name=char.upcase
+      system "sed \"s/#{name}/#{name} #{charactercount}/\" #{chapter} > #{outfile}"
       chapter_file = outfile.split("./uberbook/")[1]
       meta_strs << content_opf_string(chapter_file, chaptercount)
-      toc << toc_string(chapter_file, char)
+      toc << toc_string(chapter_file, char,charactercount)
       spine << spine_string(chaptercount)
       chaptercount += 1
+      charactercount += 1
     end
   end
   puts "Book written to ./uberbook."
@@ -149,16 +156,17 @@ def write_final_book
   system "mv uberbook/asoiaf.epub ."
 end
 
-got_chapters = find_by_book("GOT/")
-cok_chapters = find_by_book("COK/")
-sos_chapters = find_by_book("SOS/")
-ffc_chapters = find_by_book("FFC/")
-dwd_chapters = find_by_book("DWD/")
+#moby_chapters = find_by_book("moby/")
+ got_chapters = find_by_book("GOT/")
+ cok_chapters = find_by_book("COK/")
+ sos_chapters = find_by_book("SOS/")
+ ffc_chapters = find_by_book("FFC/")
+ dwd_chapters = find_by_book("DWD/")
 
-process(got_chapters, "GOT")
-process(cok_chapters, "COK")
-process(sos_chapters, "SOS")
-process(ffc_chapters, "FFC")
-process(dwd_chapters, "DWD")
+ process(got_chapters, "GOT")
+ process(cok_chapters, "COK")
+ process(sos_chapters, "SOS")
+ process(ffc_chapters, "FFC")
+ process(dwd_chapters, "DWD")
 
 write_final_book
