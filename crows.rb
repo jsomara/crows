@@ -35,15 +35,15 @@ def get_character(doc, book)
   title = ''
   case book
   when "GOT"
-    title = doc.css("h1").text
+    title = doc.css("h3.calibre5").text
   when "COK"
-    title = doc.css("p.fst").text
+    title = doc.css("h3.calibre5").text
   when "SOS"
-    title = doc.css("p.ct").text
+    title = doc.css("p.calibre4").text
   when "FFC"
-    title = doc.css("p.ct").text
+    title = doc.css("p.calibre4").text
   when "DWD"
-    title = doc.css("h1").text
+    title = doc.css("p.calibre16").text
   end
 
   return clean_title(title)
