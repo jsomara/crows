@@ -148,8 +148,6 @@ def write_final_book
     charactercount=1
     @uber_book[char].reverse.each do |chapter|
       outfile = chapter_string(chaptercount)
-      #puts "#{chapter} #{outfile}"
-      #system "cp #{chapter} #{outfile}"
       name=char.upcase
       system "sed \"s/#{name}/#{name} #{charactercount}/\" #{chapter} > #{outfile}"
       chapter_file = outfile.split("./uberbook/")[1]
@@ -175,17 +173,16 @@ def write_final_book
   system "mv uberbook/asoiaf.epub ."
 end
 
-#moby_chapters = find_by_book("moby/")
- got_chapters = find_by_book("GOT/")
- cok_chapters = find_by_book("COK/")
- sos_chapters = find_by_book("SOS/")
- ffc_chapters = find_by_book("FFC/")
- dwd_chapters = find_by_book("DWD/")
+got_chapters = find_by_book("GOT/")
+cok_chapters = find_by_book("COK/")
+sos_chapters = find_by_book("SOS/")
+ffc_chapters = find_by_book("FFC/")
+dwd_chapters = find_by_book("DWD/")
 
- process(got_chapters, "GOT")
- process(cok_chapters, "COK")
- process(sos_chapters, "SOS")
- process(ffc_chapters, "FFC")
- process(dwd_chapters, "DWD")
+process(got_chapters, "GOT")
+process(cok_chapters, "COK")
+process(sos_chapters, "SOS")
+process(ffc_chapters, "FFC")
+process(dwd_chapters, "DWD")
 
 write_final_book
