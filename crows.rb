@@ -16,7 +16,7 @@ end
 
 def process(chapters, book)
   chapter_count = 1
-  chapters.each do |chapter|
+  chapters.reverse.each do |chapter|
     doc = Nokogiri::XML(open(chapter))
     character = get_character(doc, book)
     bookstr = "#{book}, chapter #{chapter_count}"
@@ -146,7 +146,7 @@ def write_final_book
   @character_order.each do |char|
     puts "Writing chapters for #{char}..."
     charactercount=1
-    @uber_book[char].reverse.each do |chapter|
+    @uber_book[char].each do |chapter|
       outfile = chapter_string(chaptercount)
       name=char.upcase
       system "sed \"s/#{name}/#{name} #{charactercount}/\" #{chapter} > #{outfile}"
